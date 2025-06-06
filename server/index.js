@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 //.use() is used when we want to use any middleware
 app.use(
   cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -20,6 +20,11 @@ app.get("/", (req, res) => {
   res.send("server is running");
 });
 
+app.post("/audit", (req, res) => {
+  const { url } = req.body;
+  console.log(`recieved url: ${url}`);
+  res.json({ message: `server has recieved url ${url}` });
+});
 app.listen(PORT, () => {
   console.log(`server  is running on ${PORT}`);
 });
